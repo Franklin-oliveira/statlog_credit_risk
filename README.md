@@ -12,6 +12,17 @@ Solução do Case como parte do processo seletivo para Liberty Capital.
 
 ## Estrutura
 
+```bash
+.
+├── data
+│   ├── filename.data
+├── notebooks
+│   ├── filename.ipynb
+├── README.md
+├── requirements.txt
+└── Teste Cientista de Dados pl.pdf     # descrição do case em PDF
+```
+
 ## Requerimentos
 (falar como instalar as dependencias e requirements.txt)
 
