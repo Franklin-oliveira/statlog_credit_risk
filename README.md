@@ -15,7 +15,11 @@ Nesse *dataset*, indivíduos são classificados como "bons" ou "ruins" de acordo
 
 O case visa a elaboração de uma análise preditiva de classificação de clientes solicitantes, avaliados pelo seu risco de crédito (`1 = bom, 2 = ruim`). Portanto, trata-se de um problema de classificação onde serão empregados modelos de aprendizado supervisionado a fim de automatizar o processo decisório de crédito, buscando minimizar o risco de inadimplências.
 
+<font color='red'>Incluir breve descrição das análises que fiz</font>
+
 ## Estrutura
+
+<font color='red'>Adicionar novos arquivos</font>
 
 ```bash
 .
