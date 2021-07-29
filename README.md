@@ -13,28 +13,44 @@ Nesse *dataset*, indivíduos são classificados como "bons" ou "ruins" de acordo
 
 ## Introdução
 
-O case visa a elaboração de uma análise preditiva de classificação de clientes solicitantes, avaliados pelo seu risco de crédito (`1 = bom, 2 = ruim`). Portanto, trata-se de um problema de classificação onde serão empregados modelos de aprendizado supervisionado a fim de automatizar o processo decisório de crédito, buscando minimizar o risco de inadimplências.
+O case visa a elaboração de uma análise preditiva de classificação de clientes solicitantes, avaliados pelo seu risco de crédito (`1 = bom, 2 = ruim`). Portanto, trata-se de um problema de classificação onde serão empregados modelos de aprendizado supervisionado a fim de automatizar o processo decisório de concessão de crédito, buscando minimizar o risco de inadimplência.
 
-<font color='red'>Incluir breve descrição das análises que fiz</font>
+<p color='red'>Incluir breve descrição das análises que fiz</p>
 
 ## Estrutura
 
-<font color='red'>Adicionar novos arquivos</font>
+<p color='red'>Adicionar novos arquivos</p>
 
 ```bash
 .
 ├── data
-│   ├── german.data                     # base de dados
+│   ├── data.pickle                     # versão pré-processada da base de dados
+│   ├── german.data                     # base de dados (raw)
 │   ├── german.doc                      # descrição da base de dados
+├── models                              # arquivos dos modelos salvos
 ├── notebooks
-│   ├── filename.ipynb
+│   ├── 00_preprocessing_and_feature_engineering.ipynb
+│   ├── 01_eda.ipynb
 ├── README.md
 ├── requirements.txt
 └── Teste Cientista de Dados pl.pdf     # descrição do case em PDF
 ```
 
 ## Requerimentos
-(falar como instalar as dependencias e requirements.txt)
+
+Principais libraries:
+
+```sh
+numpy - pandas - swifter - seaborn - matplotlib - statsmodels 
+```
+
+Todas as bibliotecas necessárias para executar os arquivos de notebook (`.ipynb`) e suas dependências estão listadas no arquivo `requirements.txt`.
+
+Para instalar todos os requerimentos necessários (libraries principais e suas dependências), basta executar o seguinte comando em uma instância de terminal (obs: certifique-se de navegar até a pasta correta):
+
+```bash
+pip install -r requirements.txt
+```
 
 
 ## Possíveis melhorias
