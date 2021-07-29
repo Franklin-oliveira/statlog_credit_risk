@@ -41,7 +41,7 @@ O case visa a elaboração de uma análise preditiva de classificação de clien
 Principais libraries:
 
 ```sh
-numpy - pandas - swifter - seaborn - matplotlib - statsmodels 
+numpy - pandas - swifter - seaborn - matplotlib - statsmodels - sklearn 
 ```
 
 Todas as bibliotecas necessárias para executar os arquivos de notebook (`.ipynb`) e suas dependências estão listadas no arquivo `requirements.txt`.
@@ -54,3 +54,5 @@ pip install -r requirements.txt
 
 
 ## Possíveis melhorias
+
+- Converter blocos de código reutilizado em funções. Criar um script `.py` e importá-las nos arquivos _notebook_ `.ipynb` quando necessárias. 
