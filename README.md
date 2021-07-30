@@ -82,8 +82,8 @@ Quando se está trabalhando com um dataset desbalanceado, em que uma das classes
 
 As duas métricas alinham-se com o problema de negócio, em que busca-se minimizar as medidas negativas de performance (falsos positivos e falsos negativos) a fim de, por exemplo, reduzir a taxa de inadimplência. Em outras palavras, do ponto de vista da Instituição Bancária (agente que vai conceder um empréstimo ao cliente solititante), quer-se minimizar a ocorrência das seguintes situações:
 
-1. Emprestar recursos a um cliente de alto risco acreditando que este, na verdade, é de baixo risco (falso positivo). Nesse caso, há uma alta probabilidade de inadimplência. 
-2. Não conceder empréstimo a um cliente de baixo risco acreditando que este, na verdade, é de alto risco (falso negativo). Nessa situação, o banco deixa de lucrar com os juros do empréstimo que teria baixa probabilidade de inadimplência. 
+1. Emprestar recursos a um cliente de alto risco acreditando que este, na verdade, é de baixo risco (falso negativo). Nesse caso, há uma alta probabilidade de inadimplência. 
+2. Não conceder empréstimo a um cliente de baixo risco acreditando que este, na verdade, é de alto risco (falso positivo). Nessa situação, o banco deixa de lucrar com os juros do empréstimo que teria baixa probabilidade de inadimplência. 
 
 Ambas as situações afetam a lucratividade da instituição. A **F1 score** é adequada a esta aplicação pois busca minimizar a ocorrência desses 2 cenários ao priorizar, igualmente, precisão e recall. 
 
