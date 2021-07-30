@@ -16,13 +16,17 @@ Nesse *dataset*, indivíduos são classificados como "bons" ou "ruins" de acordo
 
 ![](src/dataset_head.png)
 
-Cada feature é identificada por sua posição, onde a última coluna representa a variável resposta (risco de crédito). Cada feature foi nomeada e decodificada segundo o dicionário presente em `./data/german.doc`.
+Cada informação é identificada por sua posição na tabela, onde a última coluna representa a variável resposta (risco de crédito). Cada uma das *features* foi nomeada e decodificada segundo o dicionário presente em `./data/german.doc`.
 
 ## Introdução
 
 O case visa a elaboração de uma análise preditiva de classificação de clientes solicitantes, avaliados pelo seu risco de crédito (`1 = bom, 2 = ruim`). Portanto, trata-se de um problema de classificação onde serão empregados modelos de aprendizado supervisionado a fim de automatizar o processo decisório de concessão de crédito, buscando minimizar o risco de inadimplência.
 
 Nesse sentido, foi realizada uma análise exploratória de dados e um processo de *feature engineering* a fim de preparar o dataset para aplicação de modelos preditivos. Não foi necessário lidar com *missing values*. 
+
+Três classes de modelos de Machne Learning foram avaliadas: Regressão Logística, Árvores de Decisão e Random Forests. Segundo o `F1 score`, o melhor modelo foi o Random Forest, sendo este o modelo escolhido ao fim desse estudo. 
+
+No entanto, para inserção em um ambiente de produção, deve-se também considerar o tempo computacional tomado por este modelo nas etapas de treino e avaliação em um conjunto de teste/_holdout set_. Não obstante, o Random Forest foi o pior modelo nesse quesito, tornando as _Decision Trees_ uma alternativa viável para inserção em sistemas automatizados, sem sacrificar muita performance. 
 
 ## Estrutura
 
@@ -76,13 +80,17 @@ pip install -r requirements.txt
 - Converter blocos de código reutilizado em funções. Criar um script `.py` e importá-las nos arquivos _notebook_ `.ipynb` quando necessárias. 
 - Desenvolver novas _features_ combinando uma ou mais informações presentes no dataset e avaliar se esse mecanismo melhora a performance dos modelos preditivos.
 - Estimar um modelo de _boosting_ (ex.: XGBoost) e comparar sua performance com a dos demais modelos.
-- Criar pipeline incorporando as etapas de *feature engineering*, treinamento e previsão com `Scikit-Learn` para inserir em ambientes de produção.
+- Criar _pipeline_ incorporando as etapas de *feature engineering*, treinamento e previsão com `Scikit-Learn` para inserir em ambientes de produção.
 
 
 ## Desempenho dos modelos
 
 Nesse estudo, foram avaliadas três classes de modelos para a tarefa de classificação: Regressão Logística, Árvores de Decisão e Random Forest. A figura abaixo ilustra as métricas de performance obtidas: 
 
+<p style="color:red;font-size=15px;">OBS: Explicar o porque de usar F1 score ao invés de ROC AUC ou outra métrica nesse problema</p>
+
 ![](src/holdout_performance_comparison.png)
+
+<p style="color:red;font-size=15px;">OBS: Explicar as diferenças nos tempos computacionais</p>
 
 ![](src/time_comparison.png)
