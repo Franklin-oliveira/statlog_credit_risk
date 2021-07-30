@@ -74,15 +74,6 @@ Para instalar todos os requerimentos necessários (libraries principais e suas d
 pip install -r requirements.txt
 ```
 
-
-## Possíveis melhorias
-
-- Converter blocos de código reutilizado em funções. Criar um script `.py` e importá-las nos arquivos _notebook_ `.ipynb` quando necessárias. 
-- Desenvolver novas _features_ combinando uma ou mais informações presentes no dataset e avaliar se esse mecanismo melhora a performance dos modelos preditivos.
-- Estimar um modelo de _boosting_ (ex.: XGBoost) e comparar sua performance com a dos demais modelos.
-- Criar _pipeline_ incorporando as etapas de *feature engineering*, treinamento e previsão com `Scikit-Learn` para inserir em ambientes de produção.
-
-
 ## Desempenho dos modelos
 
 Nesse estudo, foram avaliadas três classes de modelos para a tarefa de classificação: Regressão Logística, Árvores de Decisão e Random Forest. A figura abaixo ilustra as métricas de performance obtidas: 
@@ -94,3 +85,18 @@ Nesse estudo, foram avaliadas três classes de modelos para a tarefa de classifi
 <p style="color:red;font-size=15px;">OBS: Explicar as diferenças nos tempos computacionais</p>
 
 ![](src/time_comparison.png)
+
+**OBS_1**: diferenças de tempo computacional dependem não só do modelo escolhido, mas também das configurações adotadas na etapa de _hyperparameter tuning_.
+
+**OBS_2:** no modelo de Random Forest, foram usados todos os _threads_ disponíveis setando o parâmetro `n_jobs=-1`.
+
+## Possíveis melhorias
+
+- Converter blocos de código reutilizado em funções. Criar um script `.py` e importá-las nos arquivos _notebook_ `.ipynb` quando necessárias. 
+- Desenvolver novas _features_ combinando uma ou mais informações presentes no dataset e avaliar se esse mecanismo melhora a performance dos modelos preditivos.
+- Estimar um modelo de _boosting_ (ex.: XGBoost) e comparar sua performance com a dos demais modelos.
+- Criar _pipeline_ incorporando as etapas de *feature engineering*, treinamento e previsão com `Scikit-Learn` para inserir em ambientes de produção.
+
+## Considerações finais
+
+Vale destacar que a interpretação de uma métrica de avaliação/comparação escolhida (ex.: precisão, _recall_, F1 score, etc.), não deve ser o único fator considerado na tomada de decisão. Questões como a interpretabilidade do modelo afetam significativamente a tomada de decisão de negócios no dia a dia das empresas; Adicionalmente, o tempo computacional também deve ser levado em consideração dado que afeta diretamente a experiência obtida em ambientes de produção, seja em aplicações voltadas diretamente para o usuário final, seja na automação de processos internos.
