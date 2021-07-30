@@ -26,7 +26,7 @@ Nesse sentido, foi realizada uma análise exploratória de dados e um processo d
 
 Três classes de modelos de Machne Learning foram avaliadas: Regressão Logística, Árvores de Decisão e Random Forests. Segundo o `F1 score`, o melhor modelo foi o Random Forest, sendo este o modelo escolhido ao fim desse estudo. 
 
-No entanto, para inserção em um ambiente de produção, deve-se também considerar o tempo computacional tomado por este modelo nas etapas de treino e avaliação em um conjunto de teste/_holdout set_. Não obstante, o Random Forest foi o pior modelo nesse quesito, tornando as _Decision Trees_ uma alternativa viável para inserção em sistemas automatizados, sem sacrificar muita performance. 
+No entanto, para inserção em um ambiente de produção, deve-se também considerar o tempo computacional tomado por este modelo nas etapas de treino e avaliação em um conjunto de teste/_holdout set_. Não obstante, o Random Forest foi o pior modelo nesse quesito, tornando as _Decision Trees_ e a Regressão Logística alternativas viáveis para inserção em sistemas automatizados, sem sacrificar muita performance. 
 
 ## Estrutura
 
@@ -53,7 +53,7 @@ No entanto, para inserção em um ambiente de produção, deve-se também consid
 ├── src                                               # arquivos de ilustração para o README 
 ├── README.md
 ├── requirements.txt        
-└── proposta.pdf                                      # descrição do desafio em PDF
+└── proposta.pdf                                      # proposta em PDF
 ```
 
 ## Requerimentos
@@ -74,17 +74,38 @@ Para instalar todos os requerimentos necessários (libraries principais e suas d
 pip install -r requirements.txt
 ```
 
-## Desempenho dos modelos
+## Raciocínio de Negócio e Desempenho dos modelos
 
-Nesse estudo, foram avaliadas três classes de modelos para a tarefa de classificação: Regressão Logística, Árvores de Decisão e Random Forest. A figura abaixo ilustra as métricas de performance obtidas: 
+Nesse estudo, foram avaliadas três classes de modelos para a tarefa de classificação: Regressão Logística, Árvores de Decisão e Random Forest. Vale comentar em mais detalhes a escolha da métrica de avaliação e seleção dos modelos preditivos. 
 
-<p style="color:red;font-size=15px;">OBS: Explicar o porque de usar F1 score ao invés de ROC AUC ou outra métrica nesse problema</p>
+Quando se está trabalhando com um dataset desbalanceado, em que uma das classes domina as demais (como é o caso neste estudo; 70% dos clientes está classificado como de baixo risco e 30% de alto risco), duas métricas se sobressaem: **F1 score** e **ROC AUC score**. 
+
+As duas métricas alinham-se com o problema de negócio, em que busca-se minimizar as medidas negativas de performance (falsos positivos e falsos negativos) a fim de, por exemplo, reduzir a taxa de inadimplência. Em outras palavras, do ponto de vista da Instituição Bancária (agente que vai conceder um empréstimo ao cliente solititante), quer-se minimizar a ocorrência das seguintes situações:
+
+1. Emprestar recursos a um cliente de alto risco acreditando que este, na verdade, é de baixo risco (falso positivo). Nesse caso, há uma alta probabilidade de inadimplência. 
+2. Não conceder empréstimo a um cliente de baixo risco acreditando que este, na verdade, é de alto risco (falso negativo). Nessa situação, o banco deixa de lucrar com os juros do empréstimo que teria baixa probabilidade de inadimplência. 
+
+Ambas as situações afetam a lucratividade da instituição. A **F1 score** é adequada a esta aplicação pois busca minimizar a ocorrência desses 2 cenários ao priorizar, igualmente, precisão e recall. 
+
+A área abaixo da curva ROC também pode ser considerada dado que prioriza o númmero de verdadeiros positivos, minimizando o número de falsos positivos (ainda mais se considerarmos que, o caso 1 é o mais prejudicial à empresa). No entanto, em um dataset desbalanceado, o número de verdadeiros positivos pode ser superestimado (a classe de baixo risco domina a de alto risco na razão 70/30), assim, superestimando também a métrica **ROC AUC score**. 
+
+Por esse motivo, foi empregada a métrica **F1** para selecionar o modelo preditivo na etapa de treino. Foi escolhido o modelo que apresentou melhor desempenho segundo essa métrica em um **3-fold cross-validation** (foram selecionados apenas 3-folds devido ao baixo número de registros). 
+
+Ainda, 20% dos registros foram selecionados para compor o conjunto *holdout*. A figura abaixo ilustra as métricas de performance obtidas para seleção do modelo preditivo (conjunto de treino) e avaliação de performance no conjunto _holdout_: 
 
 ![](src/holdout_performance_comparison.png)
 
-<p style="color:red;font-size=15px;">OBS: Explicar as diferenças nos tempos computacionais</p>
+<br>
+
+No gráfico acima, vemos que o modelo de Random Forest foi o que atingiu maior escore *F1* no conjunto de treino e, portanto, foi o principal modelo escolhido para esta aplicação. Quando avaliado fora da amostra (no conjunto *holdout*), seu desempenho manteve-se estável, tornando-o um modelo robusto para ambientes de produção. 
+
+No entanto, também é importante considerar os tempos computacionais dispendidos por cada um destes modelos nas etapas de treino e avaliação, dado que este fator pode afetar diretamente a experiência em aplicações. A figura abaixo exibe os tempos computacionais de cada modelo, em segundos:
 
 ![](src/time_comparison.png)
+
+O Random Forest, por ser um modelo de *ensemble* (mais alta complexidade), obteve um tempo computacional significativamente superior em cada uma das etapas. No entanto, deve-se ressaltar que, a etapa de treino incorpora o *tuning* de hiperparâmetros por meio de um *GridSearch* o que, dependendo da configuração, altera bastante o tempo dispendido. 
+
+Ainda que seu tempo de avaliação também seja superior aos demais, deve-se atentar para o fato de que, ainda assim, situa-se muito abaixo de 1 segundo, o que ainda o mantém como forte candidato para inserção em ambientes de produção. Como a ordem de crescimento do tempo computacional deste modelo também é superior aos demais, para grandes datasets, os modelos de Regressão Logística e *Decision Trees* configuram opções atrativas, sem sacrificar muito poder preditivo. 
 
 **OBS_1**: diferenças de tempo computacional dependem não só do modelo escolhido, mas também das configurações adotadas na etapa de _hyperparameter tuning_.
 
