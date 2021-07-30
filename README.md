@@ -56,3 +56,5 @@ pip install -r requirements.txt
 ## Possíveis melhorias
 
 - Converter blocos de código reutilizado em funções. Criar um script `.py` e importá-las nos arquivos _notebook_ `.ipynb` quando necessárias. 
+- Estimar um modelo de _boosting_ (ex.: XGBoost) e comparar sua performance com a dos demais modelos.
+- Criar pipeline incorporando as etapas de *feature engineering*, treinamento e previsão para colocar inserir em ambientes de produção.
